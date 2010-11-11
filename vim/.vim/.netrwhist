@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/etc/rc.d'
+let g:netrw_dirhist_2='/home/cprussin/src/midori-0.2.6/extensions'
+let g:netrw_dirhist_3='/home/via/dev/akaris/.git'
+let g:netrw_dirhist_4='/etc/libvirt'
+let g:netrw_dirhist_5='/home/via/dev/akaris/sys/include/i386'
+let g:netrw_dirhist_6='/home/via/dev/akaris/sys'
