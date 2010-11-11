@@ -1,0 +1,11 @@
+batt=$(apm -a)
+case $batt in
+*0*)
+  battline="Batt:  $(apm -l)%, $(apm -m) Minutes ";;
+*)
+  battline="";;
+esac
+temp=$(sysctl hw.sensors.itherm0.temp1 | cut -d = -f 2 | cut -d ' ' -f 1)
+vol=$(mixerctl | grep outputs.master= | cut -d = -f 2 | cut -d , -f 1)
+loads=$(sysctl vm.loadavg | cut -d = -f 2)
+xsetroot -name "$battline   Temp: $temp   Vol: $vol   $loads    $(date +"%F %R" )"
