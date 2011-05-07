@@ -1,0 +1,2 @@
+loads=$(cat /proc/loadavg)
+xsetroot -name "$loads    $(date +"%F %R" )"

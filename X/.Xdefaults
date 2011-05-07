@@ -1,5 +1,5 @@
 URxvt.perl-ext-common:  default,selection,mark-yank-urls
-URxvt.urlLauncher:  /usr/bin/firefox-beta-bin
+URxvt.urlLauncher:  /usr/bin/firefox
 URxvt.keysym.M-u: perl:mark-yank-urls:activate_mark_mode
 URxvt.underlineURLs:  true
 URxvt.foreground: green
