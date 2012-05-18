@@ -28,7 +28,7 @@ color darkburn
 "
 " Input.
 "
-set mouse=a
+set mouse=i
 set backspace=indent,eol,start
 
 "
@@ -36,7 +36,7 @@ set backspace=indent,eol,start
 "
 let mapleader = ","
 nmap <leader>w :w!<cr>
-nmap <leader>t :!/usr/bin/ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+nmap <leader>t :!/usr/local/bin/ectags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 " Change buffers.                
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -66,22 +66,7 @@ set formatoptions+=tcrqn
 "
 " Tags.
 "
-let Tlist_Ctags_Cmd = "/usr/bin/ctags"
+let Tlist_Ctags_Cmd = "/usr/local/bin/ectags"
 let Tlist_WinWidth = 50
 
 "
-" Environment-specific settings.
-"
-if &diff " Setup for diff environment.
-else " Setup for normal environment.
-endif
-
-
-"
-" Support functions.
-"
-function! CurDir()
-    let curdir = substitute(getcwd(), '/Users/amir/', "~/", "g")
-    return curdir
-endfunction
-
