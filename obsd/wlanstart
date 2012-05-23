@@ -14,21 +14,23 @@ while true;
     *)
       #find networks
       ifconfig $wlan down
-      nets=$(ifconfig $wlan scan | sed -n -E 's/^[[:space:]]+nwid ([[:graph:]]+).*/\1/p') 
-      ournets=$(cat "$conffile")
-      IFS='\n'
+      nets="$(ifconfig $wlan scan | sed -n -E 's/^[[:space:]]+nwid ([[:graph:]]+).*/\1/p')" 
+      ournets="$(cat "$conffile")"
+      echo "$ournets"
+      IFS='
+'
       for curnet in $ournets;
         do
-          IFS=$OIFS
-          nwid=$(echo $curnet | awk '{print $1;}')
-          if echo $nets | grep "^$nwid " >/dev/null; then
+          IFS="$OIFS"
+          echo "curnet: $curnet"
+          nwid=$(echo "$curnet" | awk '{print $1;}')
+          if echo "$nets" | grep "^$nwid$" >/dev/null; then
             #set up this network
             echo "ifconfig $wlan up nwid $curnet"
             ifconfig $wlan up nwid $curnet
             dhclient $wlan
             break
           fi
-          IFS='\n'
       done ;;
     esac
     sleep 5
