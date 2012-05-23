@@ -1,29 +1,37 @@
 wlan=iwn0
 conffile=/etc/wlans
+OIFS=$IFS
 
 
 while true;
   do
-    status=$(ifconfig $wlan | grep status | awk {'print $2'})
+    status=$(ifconfig $wlan | grep -E "^[[:blank:]]+status:" | awk {'print $2'})
+    echo "status: $status"
     case $status in
     *active*)
       #do nothing
-      sleep 5 ;;
+      ;;
     *)
       #find networks
       ifconfig $wlan down
-      nets=$(ifconfig $wlan scan | grep nwid | awk {'print $2'})
-      ournets=$(cat $conffile | awk {'print $1'})
+      nets=$(ifconfig $wlan scan | sed -n -E 's/^[[:space:]]+nwid ([[:graph:]]+).*/\1/p') 
+      ournets=$(cat "$conffile")
+      IFS='\n'
       for curnet in $ournets;
         do
-          if echo $nets | grep $curnet >/dev/null; then
+          IFS=$OIFS
+          nwid=$(echo $curnet | awk '{print $1;}')
+          if echo $nets | grep "^$nwid " >/dev/null; then
             #set up this network
-            ifconfig $wlan up nwid $(cat $conffile | grep $curnet | head -n 1)
+            echo "ifconfig $wlan up nwid $curnet"
+            ifconfig $wlan up nwid $curnet
             dhclient $wlan
             break
           fi
+          IFS='\n'
       done ;;
     esac
+    sleep 5
 done
 
 
