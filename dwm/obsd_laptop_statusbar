@@ -1,4 +1,8 @@
 batt=$(apm -a)
+wireless=$(ifconfig iwn0 | sed -E -n "s/[[:space:]]+ieee80211:.+nwid ([[:graph:]]+).+/\1/p")
+if [ ! $wireless ]; then
+  wireless="---"
+fi
 case $batt in
 *0*)
   battline="Batt:  $(apm -l)%, $(apm -m) Minutes ";;
@@ -8,4 +12,4 @@ esac
 temp=$(sysctl hw.sensors.itherm0.temp1 | cut -d = -f 2 | cut -d ' ' -f 1)
 vol=$(mixerctl | grep outputs.master= | cut -d = -f 2 | cut -d , -f 1)
 loads=$(sysctl vm.loadavg | cut -d = -f 2)
-xsetroot -name "$battline   Temp: $temp   Vol: $vol   $loads    $(date +"%F %R" )"
+xsetroot -name "$battline iwn0:[$wireless]  Temp: $temp   Vol: $vol   $loads    $(date +"%F %R" )"

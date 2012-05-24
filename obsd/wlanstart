@@ -1,7 +1,27 @@
+#!/usr/local/bin/bash
 wlan=iwn0
 conffile=/etc/wlans
+logfile=/var/log/wlanstart
+pidfile=/var/run/wlanstart
+
 OIFS=$IFS
 
+redirect_fds() {
+  [[ -t 0 ]] && exec</dev/null
+  [[ -t 1 ]] && exec >"$logfile"
+  [[ -t 2 ]] && exec >"$logfile"
+  eval exec {3..255}\>\&-
+}
+
+daemonize() {
+  redirect_fds()
+  cd /
+  umask 0
+  trap '' 1 2
+  echo $$ > $pidfile
+}
+
+daemonize()
 
 while true;
   do
@@ -34,6 +54,6 @@ while true;
       done ;;
     esac
     sleep 5
-done
+done &
 
 
