@@ -1,5 +1,5 @@
---- dwm.c	2012-07-31 12:46:36.009800225 -0400
-+++ /home/via/dev/dwm-5.8.2/dwm.c	2012-07-31 12:48:55.883126301 -0400
+--- dwm-5.8.2-orig/dwm.c	2012-08-01 15:28:00.014814738 -0400
++++ dwm-5.8.2/dwm.c	2012-08-01 10:41:14.672374136 -0400
 @@ -684,6 +684,8 @@ drawbar(Monitor *m) {
  	unsigned long *col;
  	Client *c;
@@ -9,7 +9,7 @@
  	for(c = m->clients; c; c = c->next) {
  		occ |= c->tags;
  		if(c->isurgent)
-@@ -713,15 +715,24 @@ drawbar(Monitor *m) {
+@@ -713,15 +715,26 @@ drawbar(Monitor *m) {
  	}
  	else
  		dc.x = m->ww;
@@ -29,6 +29,8 @@
 +		if (num_cl) {
 +			dc.w = dc.w / num_cl;
 +			for (c = m->clients; c != NULL; c = c->next) {
++				if (!ISVISIBLE(c)) 
++					continue;
 +				col = ((m == selmon) && (m->sel == c)) ? dc.sel : dc.norm;
 +				drawtext(c->name, col, False);
 +				drawsquare(c->isfixed, c->isfloating, False, col);
@@ -40,3 +42,4 @@
  	}
  	XCopyArea(dpy, dc.drawable, m->barwin, dc.gc, 0, 0, m->ww, bh, 0, 0);
  	XSync(dpy, False);
+
