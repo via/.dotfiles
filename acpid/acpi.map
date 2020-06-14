@@ -1,0 +1,5 @@
+"EV_SW" 0x05 "SW_LID" 0 1 "lid-close"
+"EV_SW" 0x05 "SW_LID" 0 0 "lid-open"
+
+"EV_KEY" 0x01 "KEY_POWER" 116 1 "pwr-button"
+

@@ -1,0 +1,3 @@
+#!/bin/sh
+echo freeze > /sys/power/state
+sleep 5
