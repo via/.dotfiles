@@ -1,2 +1,11 @@
+batt=$(cat /sys/class/power_supply/BAT1/capacity)
+batt_volts=$(cat /sys/class/power_supply/BAT1/voltage_now)
+batt_amps=$(cat /sys/class/power_supply/BAT1/current_now)
+pwr=$(echo "scale=1; $batt_volts * $batt_amps / 1000000000000" | bc)
+screen=$(cat /sys/class/backlight/*/brightness)
+maxscreen=$(cat /sys/class/backlight/*/max_brightness)
+brightness=$(($screen * 100 / $maxscreen))
+wifi=$(iwgetid -r)
+
 loads=$(cat /proc/loadavg)
-xsetroot -name "$loads    $(date +"%F %R" )"
+xsetroot -name "batt:$batt ($pwr W)  disp:$brightness   wifi:[$wifi]   $(date +"%F %R" )"

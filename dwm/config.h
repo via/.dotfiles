@@ -57,9 +57,9 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *lockcmd[] = { "xscreensaver-command", "-lock", NULL };
+static const char *lockcmd[] = { "xautolock", "-locknow"};
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "urxvt", NULL };
+static const char *termcmd[]  = { "urxvt", "-fn", "xft:Deja Vu Sans Mono:pixelsize=22:style=Condensed", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
