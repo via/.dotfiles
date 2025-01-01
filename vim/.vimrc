@@ -20,9 +20,10 @@ set number showcmd ruler
 " Colors.
 "
 syntax on
-let xterm16_colormap = 'soft'
-let xterm16_brightness = 'high'
-color darkburn
+let g:gruvbox_contrast_light = 'hard'
+set bg=dark
+color gruvbox
+
 "
 " Input.
 "
@@ -43,3 +44,8 @@ set tabstop=2 shiftwidth=2 expandtab smarttab " Tabbing.
 set autoindent smartindent " Autoindent.
 set formatoptions+=tcrqn
 
+"
+" ALE
+"
+let g:ale_completion_enabled = 1
+set omnifunc=ale#completion#OmniFunc
