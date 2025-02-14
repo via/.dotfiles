@@ -1,0 +1,7 @@
+deps:
+  wmenu
+  dejavu fonts
+  river
+  rivercairo
+  foot
+  sandbar
