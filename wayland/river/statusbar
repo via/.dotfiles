@@ -19,4 +19,5 @@ while /bin/true; do
   loads=$(cat /proc/loadavg)
   #xsetroot -name "batt:$batt ($pwr W)  disp:$brightness   wifi:[$wifi]   $(date +"%F %R" )"
   echo "all status batt:$batt ($pwr W)  disp:$brightness$panelsave   wifi:[$wifi]   $(date +"%F %R" )"
+  sleep 2
 done | sandbar -font 'Deja Vu Sans Mono:size=16'
