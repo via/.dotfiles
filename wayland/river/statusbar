@@ -1,0 +1,22 @@
+while /bin/true; do
+  batt=$(cat /sys/class/power_supply/BAT1/capacity)
+  batt_volts=$(cat /sys/class/power_supply/BAT1/voltage_now)
+  batt_amps=$(cat /sys/class/power_supply/BAT1/current_now)
+  pwr=$(echo "scale=1; $batt_volts * $batt_amps / 1000000000000" | bc)
+  screen=$(cat /sys/class/backlight/*/brightness)
+  maxscreen=$(cat /sys/class/backlight/*/max_brightness)
+  panelsave=$(cat /sys/class/backlight/*/device/amdgpu/panel_power_savings)
+  brightness=$(($screen * 100 / $maxscreen))
+  wifi=$(iwgetid -r)
+  
+  if [ "$panelsave" != "0" ]; then
+    panelsave='*'
+  else
+    panelsave=''
+  fi
+  
+  
+  loads=$(cat /proc/loadavg)
+  #xsetroot -name "batt:$batt ($pwr W)  disp:$brightness   wifi:[$wifi]   $(date +"%F %R" )"
+  echo "all status batt:$batt ($pwr W)  disp:$brightness$panelsave   wifi:[$wifi]   $(date +"%F %R" )"
+done | sandbar -font 'Deja Vu Sans Mono:size=16'

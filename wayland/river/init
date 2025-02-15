@@ -169,7 +169,6 @@ riverctl rule-add -app-id "bar" csd
 riverctl default-layout rivercarro
 rivercarro -outer-gaps 0 -per-tag &
 
-while /usr/bin/true; do
-  echo -n 'all status '; /home/via/dev/statusbar
-  sleep 2
-done | sandbar -font 'Deja Vu Sans Mono:size=18' &
+riverctl spawn '/home/via/dev/statusbar'
+
+# -font "''Deja Vu Sans Mono:size=18'"'
