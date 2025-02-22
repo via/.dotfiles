@@ -1,0 +1,10 @@
+#!/bin/sh
+
+export QT_SCALE_FACTOR=1.5
+pipewire &
+
+while /usr/bin/true; do
+  /home/via/dev/statusbar
+  sleep 2
+done | /home/via/dev/.dotfiles/dwl/dwl
+
